@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for filter in filter %}
+<div class="filter">
+<form method="get" %}>
+    
+    {{ filter }} 
+    <button type="submit">Filter</button>
+</form>
+{% endfor %}
+</div>
+
+<article class="animalstabel">
+{% for animal in animal_list %}
+	<article class="animalitem">
+
+		
+		Type animal: {{ animal.animal_type }}<br> 
+		Name: {{animal.name}}<br> 
+		Date of birth: {{animal.date}}<br>
+		{% if animal.years < 1 %}
+		Age: >1 year<br>
+		{% else %}
+		Age: {{animal.years}} year<br>
+		{% endif %}
+		height: {{ animal.height }} cm <br> 
+		weight: {{ animal.weight }} kg <br>
+		{% if animal.passport %} 
+			passport: {{ animal.passport }}<br>
+
+		{% endif %}	
+		Medical history of this animal: <a href="{% url 'create_disease' animal.pk %}">Medical History</a><br>
+	<a href="{% url 'update_aminal_data' animal.pk %}">Update</a>
+
+
+	<form method="post" action="{% url 'delete_aminal_data' animal.pk %}">
+		{% csrf_token %}
+		<button type="" name="Delete">Delete</button>
+		
+	</form>
+
+
+    </article>
+{% endfor %}
+
+</article>
+
+
+<div>
+<a href="{% url 'create_aminal_data' %}">Add an animal</a>
+</div>	
+<style type="text/css">
+.animalstabel {
+    margin: 0;
+    padding: .3rem;
+    background-color: #eee;
+    font: 1rem 'Fira Sans', sans-serif;
+}
+
+.animalitem {
+	background: right/contain content-box border-box no-repeat white
+	margin: .15rem;
+    padding: .15rem;
+    font-size: 1.2rem;
+}
+.filter {
+	margin-bottom: 20px
+}
+</style>
+{% endblock %}
+

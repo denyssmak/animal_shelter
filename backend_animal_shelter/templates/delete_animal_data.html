@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="post" action="{% url 'delete_aminal_data' animal.pk %}">
+		{% csrf_token %}
+		{{form }}
+		<button type="" name="Delete">Delete</button>
+	
+	
+		
+				
+	</form>	
+{% endblock %}

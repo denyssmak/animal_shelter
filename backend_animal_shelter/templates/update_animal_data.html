@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+	<form method="post">
+		{% csrf_token %}
+		Enter type animal: {{ form.animal_type }}<br>
+		Enter pet's name: {{ form.name }}<br> 
+		Enter pet's date of birth: {{ form.date }}<br> 
+		height: {{ form.height }}<br> 
+		weight: {{ form.weight }}<br> 
+		passport: {{ form.passport }}<br>
+		<input type="submit" value="Update">
+	</form>		
+{% endblock %}

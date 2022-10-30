@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<form method="post" enctype="multipart/form-data">
+
+		{% csrf_token %}
+		Enter type animal: {{ form.animal_type }}<br>
+		Enter pet's name: {{ form.name }}<br> 
+		Enter pet's date of birth: {{ form.date }}<br>		
+		height: {{ form.height }} <br> 
+		weight: {{ form.weight }}<br> 
+		passport: {{ form.passport }}<br> 
+		{{pass_number}}
+				<input type="submit" value="Add" >
+	</form>	
+{% endblock %}
