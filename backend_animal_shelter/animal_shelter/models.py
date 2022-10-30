@@ -5,7 +5,6 @@ from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
 
-
 class MetaInfo(models.Model):  
     created_on = models.DateField(auto_now_add=True)
     updated_on = models.DateField(auto_now =True)
@@ -46,11 +45,8 @@ class Animal(MetaInfo):
 
     deleted = models.BooleanField(default=False)
 
-
     def __str__(self):
         return f'{self.name} | {self.date} | {self.age} | {self.height} | {self.weight}'
-
-
 
     def has_passport(self):
         return bool(getattr(self, 'passport'))
@@ -82,5 +78,3 @@ class MedicalСard(MetaInfo):
         on_delete=models.CASCADE, 
         related_name='animal_diseases',
     )
-
-

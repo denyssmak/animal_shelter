@@ -5,13 +5,10 @@ from django.urls import reverse_lazy, reverse
 from .forms import CreateAnimalDataForm, UpdateAnimalDataForm, AnimalTypeFilterForm, AnimalReasonForDeletionForm, MedicalСardCreateDiseaseForm
 
 
-
-
 class AnimalListView(ListView):
     model = Animal
     template_name = 'index.html'
     extra_context = {'filter': AnimalTypeFilterForm}  
-
 
     def get_queryset(self):
         if self.request.GET.get('animal_filter'):
@@ -24,8 +21,7 @@ class CreateAnimalDataView(CreateView):
     template_name = 'create_animal_data.html'
     form_class = CreateAnimalDataForm
     success_url = reverse_lazy('index')
-    
- 
+
 
 class UpdateAnimalDataView(UpdateView):
     model = Animal
@@ -34,13 +30,11 @@ class UpdateAnimalDataView(UpdateView):
     success_url = reverse_lazy('index')
 
 
-
 class DeleteAnimalDataView(UpdateView):
     model = Animal
     template_name = 'delete_animal_data.html'
     form_class = AnimalReasonForDeletionForm
     success_url = reverse_lazy('index')
-
 
     def form_valid(self, form):
         animal = form.save(commit=False)
@@ -53,7 +47,6 @@ class MedicalСardCreateDiseaseView(CreateView):
     model = MedicalСard
     template_name = 'create_disease.html'
     form_class = MedicalСardCreateDiseaseForm
-    
 
     def form_valid(self, form):
         object = form.save(commit=False)
@@ -63,7 +56,6 @@ class MedicalСardCreateDiseaseView(CreateView):
         object.save()
         return super().form_valid(form=form)
 
-
     def get(self, request, *args, **kwargs):
         pk = kwargs['pk']
         print(kwargs, args)
@@ -71,7 +63,6 @@ class MedicalСardCreateDiseaseView(CreateView):
         context = self.get_context_data()
         context['animal_diseases'] = Animal.objects.get(id=pk).animal_diseases.all()
         return self.render_to_response(context)
-
 
     def get_success_url(self):
         pk = self.kwargs['pk']
