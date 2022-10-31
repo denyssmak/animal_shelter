@@ -1,10 +1,15 @@
 from django import forms
+from django.db.utils import OperationalError, ProgrammingError
 from .models import Animal, TypeAnimal, AnimalDeleteLog, MedicalСard
 
-ANIMALS_TYPE_CHOICES = [
-    (animal_type.id, animal_type.name) 
-    for animal_type in TypeAnimal.objects.only('id', 'name')
-]
+
+try:
+    ANIMALS_TYPE_CHOICES = [
+        (animal_type.id, animal_type.name)
+        for animal_type in TypeAnimal.objects.only('id', 'name')
+    ]
+except (OperationalError, ProgrammingError) as e:
+    ANIMALS_TYPE_CHOICES = []
 
 
 class CreateAnimalDataForm(forms.ModelForm):

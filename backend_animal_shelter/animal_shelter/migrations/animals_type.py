@@ -13,9 +13,6 @@ def type_animal(apps, schema_editor):
     TypeAnimal.objects.create(name='Raccoon')
     
 
-
-
-
 class Migration(migrations.Migration):
     dependencies = [
         ('animal_shelter', '0001_initial'),

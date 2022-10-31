@@ -1,6 +1,4 @@
 from django.db import models
-from decimal import Decimal
-from django.core.validators import MaxValueValidator, MinValueValidator
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
 
@@ -46,8 +44,9 @@ class Animal(MetaInfo):
     deleted = models.BooleanField(default=False)
 
     def __str__(self):
-        return f'{self.name} | {self.date} | {self.age} | {self.height} | {self.weight}'
+        return f'{self.name} | {self.date} | {self.height} | {self.weight}'
 
+    @property
     def has_passport(self):
         return bool(getattr(self, 'passport'))
 

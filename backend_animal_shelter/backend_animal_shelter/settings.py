@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-*_y$gjqeu1kv!6_9ftr##mbd%u=-xk074jc8#75lr5c6^!n+)y
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -78,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'animal_shelter',
-        'USER': 'rootuser',
-        'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'db',
         'PORT': '5432',
     }
 }

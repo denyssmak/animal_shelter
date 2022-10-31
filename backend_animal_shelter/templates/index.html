@@ -15,8 +15,6 @@
 <article class="animalstabel">
 {% for animal in animal_list %}
 	<article class="animalitem">
-
-		
 		Type animal: {{ animal.animal_type }}<br> 
 		Name: {{animal.name}}<br> 
 		Date of birth: {{animal.date}}<br>
@@ -27,9 +25,10 @@
 		{% endif %}
 		height: {{ animal.height }} cm <br> 
 		weight: {{ animal.weight }} kg <br>
-		{% if animal.passport %} 
+		{% if animal.has_passport %} 
 			passport: {{ animal.passport }}<br>
-
+		{% else %}
+			no passport<br>
 		{% endif %}	
 		Medical history of this animal: <a href="{% url 'create_disease' animal.pk %}">Medical History</a><br>
 	<a href="{% url 'update_aminal_data' animal.pk %}">Update</a>
