@@ -31,10 +31,10 @@
 			no passport<br>
 		{% endif %}	
 		Medical history of this animal: <a href="{% url 'create_disease' animal.pk %}">Medical History</a><br>
-	<a href="{% url 'update_aminal_data' animal.pk %}">Update</a>
+	<a href="{% url 'update_animal_data' animal.pk %}">Update</a>
 
 
-	<form method="post" action="{% url 'delete_aminal_data' animal.pk %}">
+	<form method="post" action="{% url 'delete_animal_data' animal.pk %}">
 		{% csrf_token %}
 		<button type="" name="Delete">Delete</button>
 		
@@ -48,7 +48,7 @@
 
 
 <div>
-<a href="{% url 'create_aminal_data' %}">Add an animal</a>
+<a href="{% url 'create_animal_data' %}">Add an animal</a>
 </div>	
 <style type="text/css">
 .animalstabel {

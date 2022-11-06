@@ -1,4 +1,5 @@
 FROM python:3.9-alpine
+ENV PYTHONUNBUFFERED 1
 
 WORKDIR /animal_shelter
 
@@ -11,6 +12,4 @@ RUN pip install -r requirements.txt
 
 COPY . .
 
-RUN chmod +x ./docker-entrypoint.sh
 
-ENTRYPOINT ["sh", "./docker-entrypoint.sh"]

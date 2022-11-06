@@ -1,11 +1,12 @@
-from django.db import models
 from datetime import datetime
+
 from dateutil.relativedelta import relativedelta
+from django.db import models
 
 
 class MetaInfo(models.Model):  
     created_on = models.DateField(auto_now_add=True)
-    updated_on = models.DateField(auto_now =True)
+    updated_on = models.DateField(auto_now=True)
     
     class Meta:
         abstract = True
@@ -69,7 +70,7 @@ class AnimalDeleteLog(MetaInfo):
         return self.reason
 
 
-class MedicalСard(MetaInfo):
+class MedicalCard(MetaInfo):
     disease = models.TextField() 
 
     animal = models.ForeignKey(

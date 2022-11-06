@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Animal, TypeAnimal
+from animal_shelter.models import Animal, TypeAnimal
 
 
 class AnimalAdmin(admin.ModelAdmin):

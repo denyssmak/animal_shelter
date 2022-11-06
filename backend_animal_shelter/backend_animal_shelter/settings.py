@@ -77,9 +77,9 @@ WSGI_APPLICATION = 'backend_animal_shelter.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'animal_shelter',
+        'NAME': 'backend_animal_shelter',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
+        'PASSWORD': 'adminpassword',
         'HOST': 'db',
         'PORT': '5432',
     }

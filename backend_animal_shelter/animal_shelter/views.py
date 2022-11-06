@@ -1,8 +1,14 @@
-from django.shortcuts import render
-from .models import Animal, AnimalDeleteLog, MedicalСard
-from django.views.generic import CreateView, ListView, UpdateView, DeleteView
 from django.urls import reverse_lazy, reverse
-from .forms import CreateAnimalDataForm, UpdateAnimalDataForm, AnimalTypeFilterForm, AnimalReasonForDeletionForm, MedicalСardCreateDiseaseForm
+from django.views.generic import CreateView, ListView, UpdateView
+
+from animal_shelter.forms import (
+    CreateAnimalDataForm,
+    UpdateAnimalDataForm,
+    AnimalTypeFilterForm,
+    AnimalReasonForDeletionForm,
+    MedicalCardCreateDiseaseForm,
+)
+from animal_shelter.models import Animal, AnimalDeleteLog, MedicalCard
 
 
 class AnimalListView(ListView):
@@ -43,10 +49,10 @@ class DeleteAnimalDataView(UpdateView):
         return super().form_valid(form=form)
 
 
-class MedicalСardCreateDiseaseView(CreateView):
-    model = MedicalСard
+class MedicalCardCreateDiseaseView(CreateView):
+    model = MedicalCard
     template_name = 'create_disease.html'
-    form_class = MedicalСardCreateDiseaseForm
+    form_class = MedicalCardCreateDiseaseForm
 
     def form_valid(self, form):
         object = form.save(commit=False)
@@ -58,7 +64,6 @@ class MedicalСardCreateDiseaseView(CreateView):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs['pk']
-        print(kwargs, args)
         self.object = None
         context = self.get_context_data()
         context['animal_diseases'] = Animal.objects.get(id=pk).animal_diseases.all()
