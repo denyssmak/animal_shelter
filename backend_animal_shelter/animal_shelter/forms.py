@@ -4,9 +4,6 @@ from django.db.utils import OperationalError, ProgrammingError
 from animal_shelter.models import Animal, TypeAnimal, AnimalDeleteLog, MedicalCard
 
 
-
-
-
 class CreateUpdateAnimalDataForm(forms.ModelForm):
     class Meta:
         model = Animal
@@ -16,7 +13,7 @@ class CreateUpdateAnimalDataForm(forms.ModelForm):
             'passport': forms.TextInput(attrs={'pattern': '\\d*', 'maxlength': 7, 'minlength': 7}),
             'date': forms.DateInput(attrs={'type': 'date'})
         }
-        
+       
 
 class CreateAnimalDataForm(CreateUpdateAnimalDataForm):
     pass
@@ -24,12 +21,12 @@ class CreateAnimalDataForm(CreateUpdateAnimalDataForm):
 
 class UpdateAnimalDataForm(CreateUpdateAnimalDataForm):
     pass
-        
+       
 
 class AnimalTypeFilterForm(forms.Form):
     animal_filter = forms.ModelChoiceField(TypeAnimal.objects.only('id', 'name'), empty_label='All', required=False)
-    
-        
+   
+       
 class AnimalReasonForDeletionForm(forms.ModelForm):
     class Meta:
         model = AnimalDeleteLog
@@ -40,3 +37,4 @@ class MedicalCardCreateDiseaseForm(forms.ModelForm):
     class Meta:
         model = MedicalCard
         fields = ('disease', )
+        
