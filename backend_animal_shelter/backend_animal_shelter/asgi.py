@@ -11,6 +11,9 @@ import os
 
 from django.core.asgi import get_asgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'backend_animal_shelter.settings')
+os.environ.setdefault(
+    'DJANGO_SETTINGS_MODULE',
+    'backend_animal_shelter.settings',
+)
 
 application = get_asgi_application()

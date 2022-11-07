@@ -2,9 +2,19 @@ from django.db import migrations
 
 
 def type_animal(apps, schema_editor):
-    TypeAnimal  = apps.get_model('animal_shelter', 'TypeAnimal')
-    type_names = ['Dog','Cat','Pig','Sheep','Rabbit','Fish','Hamster']
-    TypeAnimal.objects.bulk_create([TypeAnimal(name=name) for name in type_names]) 
+    TypeAnimal = apps.get_model('animal_shelter', 'TypeAnimal')
+    type_names = [
+        'Dog',
+        'Cat',
+        'Pig',
+        'Sheep',
+        'Rabbit',
+        'Fish',
+        'Hamster',
+    ]
+    TypeAnimal.objects.bulk_create(
+        [TypeAnimal(name=name) for name in type_names]
+    )
 
 
 class Migration(migrations.Migration):

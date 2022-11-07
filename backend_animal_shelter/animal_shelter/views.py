@@ -8,17 +8,24 @@ from animal_shelter.forms import (
     AnimalReasonForDeletionForm,
     MedicalCardCreateDiseaseForm,
 )
-from animal_shelter.models import Animal, AnimalDeleteLog, MedicalCard
+from animal_shelter.models import (
+    Animal,
+    AnimalDeleteLog,
+    MedicalCard,
+)
 
 
 class AnimalListView(ListView):
     model = Animal
     template_name = 'index.html'
-    extra_context = {'filter': AnimalTypeFilterForm}  
+    extra_context = {'filter': AnimalTypeFilterForm}
 
     def get_queryset(self):
         if self.request.GET.get('animal_filter'):
-            return self.model.objects.filter(animal_type=self.request.GET['animal_filter'], deleted=False)
+            return self.model.objects.filter(
+                animal_type=self.request.GET['animal_filter'],
+                deleted=False
+            )
 
         return self.model.objects.filter(deleted=False)
 
@@ -45,7 +52,10 @@ class DeleteAnimalDataView(UpdateView):
     def form_valid(self, form):
         animal = form.save(commit=False)
         animal.deleted = True
-        AnimalDeleteLog.objects.create(animal=animal, reason=form.data['reason'])
+        AnimalDeleteLog.objects.create(
+            animal=animal,
+            reason=form.data['reason']
+        )
         return super().form_valid(form=form)
 
 
@@ -66,7 +76,9 @@ class MedicalCardCreateDiseaseView(CreateView):
         pk = kwargs['pk']
         self.object = None
         context = self.get_context_data()
-        context['animal_diseases'] = Animal.objects.get(id=pk).animal_diseases.all()
+        context['animal_diseases'] = Animal.objects.get(
+            id=pk
+        ).animal_diseases.all()
         return self.render_to_response(context)
 
     def get_success_url(self):
