@@ -1,4 +1,5 @@
 from django.urls import reverse_lazy, reverse
+from django.shortcuts import get_object_or_404
 from django.views.generic import CreateView, ListView, UpdateView
 
 from animal_shelter.forms import (
@@ -67,7 +68,7 @@ class MedicalCardCreateDiseaseView(CreateView):
     def form_valid(self, form):
         object = form.save(commit=False)
         pk = self.kwargs['pk']
-        animal = Animal.objects.get(id=pk)
+        animal = get_object_or_404(Animal, id=pk)
         object.animal = animal
         object.save()
         return super().form_valid(form=form)
