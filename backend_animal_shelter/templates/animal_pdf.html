@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ name }}</title>
+
+    <p>name:  {{ name }}</p>
+    <p>date of birth:  {{ date }}</p>
+    <p>height:{{ height }}</p>
+    <p>weight:{{ weight }}</p>
+    {% if animal.has_passport %}
+        <p>passport: {{ passport }}</p>
+    {% else %}
+        <p>no passport</p>
+    {% endif %}
+</head>
+<body>
+
+</body>
+</html>

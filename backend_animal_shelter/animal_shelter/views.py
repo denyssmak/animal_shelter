@@ -1,5 +1,9 @@
-from django.urls import reverse_lazy, reverse
+import pdfkit as pdfkit
+from django.http import HttpResponse
 from django.shortcuts import get_object_or_404
+from django.template.loader import get_template
+from django.urls import reverse_lazy, reverse
+from django.views import View
 from django.views.generic import CreateView, ListView, UpdateView
 
 from animal_shelter.forms import (
@@ -85,3 +89,37 @@ class MedicalCardCreateDiseaseView(CreateView):
     def get_success_url(self):
         pk = self.kwargs['pk']
         return reverse('create_disease', kwargs={'pk': pk})
+
+
+class GenerateAnimalPDF(View):
+    model = Animal
+    template_name = 'animal_pdf.html'
+
+    def post(self, request, *args, **kwargs):
+        options = {}
+        pk = kwargs['pk']
+        animal = get_object_or_404(Animal, id=pk)
+        data = {
+            'name':animal.name,
+            'date': animal.date,
+            'height': animal.height,
+            'weight': animal.weight,
+            'passport': animal.passport,
+        }
+
+        template = get_template('animal_pdf.html')
+        path_wkhtmltopdf = r'C:\Program Files\wkhtmltopdf\bin\wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=path_wkhtmltopdf)
+        template_data = template.render(context=data)
+        print(template_data)
+        # wkhtmltopdf_cmd = subprocess.Popen(['which', os.environ.get('WKHTMLTOPDF_BINARY', 'wkhtmltopdf-pack')],
+        #                                    stdout=subprocess.PIPE).communicate()[0].strip()
+        # configuration = pdfkit.configuration(wkhtmltopdf=wkhtmltopdf_cmd)
+        pdf_file = pdfkit.from_string(template_data, False, options, configuration=config)
+        response = HttpResponse(pdf_file, content_type='application/pdf')
+        response['Content-Disposition'] = "attachment; filename=%s" % 'animal_' + animal.name + '.pdf'
+        print(response['Content-Disposition'])
+
+        return response
+
+

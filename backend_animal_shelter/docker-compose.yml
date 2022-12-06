@@ -1,6 +1,12 @@
 version: '3.7'
 
 services:
+  wkhtmltopdf:
+    image: wkhtmltopdf
+    container_name: wkhtmltopdf
+    build:
+      dockerfile: Dockerfile
+      context: .
   web:
     build: ./
     command: >

@@ -8,6 +8,7 @@ from animal_shelter.views import (
     UpdateAnimalDataView,
     DeleteAnimalDataView,
     MedicalCardCreateDiseaseView,
+    GenerateAnimalPDF,
 )
 
 urlpatterns = [
@@ -31,5 +32,10 @@ urlpatterns = [
         'create_disease/<int:pk>/',
         MedicalCardCreateDiseaseView.as_view(),
         name='create_disease',
+    ),
+    path(
+        'animal_pdf/<int:pk>/',
+        GenerateAnimalPDF.as_view(),
+        name='animal_pdf',
     )
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -30,7 +30,12 @@
 		{% else %}
 			no passport<br>
 		{% endif %}	
-		Medical history of this animal: <a href="{% url 'create_disease' animal.pk %}">Medical History</a><br>
+		Medical history of this animal: <a href="{% url 'create_disease' animal.pk %}">Medical history</a><br>
+            <form method="post" action="{% url 'animal_pdf' animal.pk %}">
+		        {% csrf_token %}
+		        <button type="" name="PDF">Download PDF</button>
+	        </form>
+
 	<a href="{% url 'update_animal_data' animal.pk %}">Update</a>
 
 
